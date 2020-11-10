@@ -1,0 +1,10 @@
+#!/bin/sh
+
+URL="https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=$WEATHER_APP_ID&units=metric"
+
+resp=$(/usr/bin/curl $URL -s)
+
+temp=$(echo $resp | /usr/local/bin/jq ".main.temp")"°C"
+weather=$(echo $resp | /usr/local/bin/jq -r ".weather[0].description")
+
+echo "It's $temp, $weather"
